@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "partido")
@@ -35,4 +34,8 @@ public class Partido extends Base{
     @ManyToOne()
     @JoinColumn(name = "fk_visitante")
     private Equipo equipoVisitante;
+
+    @OneToOne()
+    @JoinColumn(name = "marcador")
+    private Resultado marcador;
 }

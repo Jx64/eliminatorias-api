@@ -1,10 +1,8 @@
 package com.example.eliminatorias.services;
 
 import com.example.eliminatorias.entities.Base;
-import com.example.eliminatorias.entities.Equipo;
 import com.example.eliminatorias.repositories.BaseRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;

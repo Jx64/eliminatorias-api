@@ -8,9 +8,6 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 @Entity
 @Table(name = "Equipo")

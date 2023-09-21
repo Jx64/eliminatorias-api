@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 
     @Autowired
-    protected S service;
+    protected S servicio;
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.findAll());
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"ERROR NOT FOUND\"}");
         }
@@ -23,7 +23,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.findById(id));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"ERROR NOT FOUND\"}");
         }
@@ -32,7 +32,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody E entity){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"ERROR CAN'T SAVE\"}");
         }
@@ -41,7 +41,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E equipo){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.update(id, equipo));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, equipo));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"ERROR CAN'T UPDATE\"}");
         }
@@ -50,7 +50,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(service.delete(id));
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"ERROR CAN'T DELETE\"}");
         }
