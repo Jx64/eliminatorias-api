@@ -15,6 +15,7 @@
 	<description>API eliminatorias del mundial</description>
 	<properties>
 		<java.version>20</java.version>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -59,7 +60,7 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>1.5.5.Final</version>
+			<version>${org.mapstruct.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -113,7 +114,7 @@
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
-							<version>1.5.5.Final</version>
+							<version>${org.mapstruct.version}</version>
 						</path>
 						<!-- other annotation processors -->
 						<path>
