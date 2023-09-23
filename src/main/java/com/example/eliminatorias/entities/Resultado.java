@@ -19,22 +19,18 @@ import org.hibernate.envers.Audited;
 @Audited
 public class Resultado extends Base {
 
-    @Size
     @PositiveOrZero
     @Column(name = "golesVisitante", nullable = false)
     private int golesVisitante;
 
-    @Size
     @PositiveOrZero
     @Column(name = "golesLocal", nullable = false)
     private int golesLocal;
 
-    @Size
     @PositiveOrZero
     @Column(name = "numeroTarjetasRojas", nullable = false)
     private int numeroTarjetasRojas;
 
-    @Size
     @PositiveOrZero
     @Column(name = "numeroTarjetasAmarillas", nullable = false)
     private int numeroTarjetasAmarillas;
