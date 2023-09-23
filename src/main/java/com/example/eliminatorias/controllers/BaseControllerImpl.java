@@ -1,13 +1,11 @@
 package com.example.eliminatorias.controllers;
 
 import com.example.eliminatorias.entities.Base;
-import com.example.eliminatorias.exceptions.GlobalExceptionHandler;
 import com.example.eliminatorias.services.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 

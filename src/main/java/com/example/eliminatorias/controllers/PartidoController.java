@@ -1,19 +1,14 @@
 package com.example.eliminatorias.controllers;
 
-import com.example.eliminatorias.dtos.EquipoDto;
 import com.example.eliminatorias.dtos.PartidoDto;
 import com.example.eliminatorias.dtos.PartidoMapper;
-import com.example.eliminatorias.entities.Equipo;
 import com.example.eliminatorias.entities.Partido;
 import com.example.eliminatorias.services.PartidoServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,10 +51,8 @@ public class PartidoController extends BaseControllerImpl<Partido, PartidoServic
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Partido partido) {
         try {
-
             PartidoDto partidoDto = partidoMapper.partidoToPartidoDto(servicio.update(id, partido));
-            return ResponseEntity.status(HttpStatus.OK).body("{\"test\":\"test CAN'T UPDATE\"}");
-            //return ResponseEntity.status(HttpStatus.OK).body(partidoDto);
+            return ResponseEntity.status(HttpStatus.OK).body(partidoDto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"ERROR CAN'T UPDATE\"}");
         }
