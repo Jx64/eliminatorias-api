@@ -8,9 +8,10 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "Equipo")
+@Table(name = "equipos")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -27,15 +28,9 @@ public class Equipo extends Base implements Serializable {
     @Column(name = "tecnico", nullable = false)
     private String directorTecnico;
 
-    //El siguiente codigo debe utilizarse un actualizador que cuente en la tabla Partidos
-    // la cantidad de veces que un equipo juega de local o visitante.
-    /*@OneToMany(cascade = CascadeType.ALL, orphanRemoval = false)
-    @JoinTable(
-            name = "equipo_partido",
-            joinColumns = @JoinColumn(name = "equipo_id"),
-            inverseJoinColumns = @JoinColumn(name = "partido_id")
-    )
-    private List<Partido> partidosJugados = new ArrayList<Partido>();*/
+    @OneToMany(mappedBy = "equipoLocal")
+    private Set<Partido> partidosLocal;
 
-
+    @OneToMany(mappedBy = "equipoVisitante")
+    private Set<Partido> partidosVisitante;
 }

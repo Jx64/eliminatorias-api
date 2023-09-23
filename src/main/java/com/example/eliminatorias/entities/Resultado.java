@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 @Entity
-@Table(name = "resultado")
+@Table(name = "resultados")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,4 +27,7 @@ public class Resultado extends Base {
 
     @Column(name = "numeroTarjetasAmarillas", nullable = false)
     private int numeroTarjetasAmarillas;
+
+    @OneToOne(mappedBy = "marcador")
+    private Partido partido;
 }

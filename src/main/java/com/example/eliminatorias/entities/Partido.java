@@ -10,7 +10,7 @@ import org.hibernate.envers.Audited;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "partido")
+@Table(name = "partidos")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,14 +28,14 @@ public class Partido extends Base{
     private String arbitro;
 
     @ManyToOne()
-    @JoinColumn(name = "fk_local")
+    @JoinColumn(name = "idEquipolocal")
     private Equipo equipoLocal;
 
     @ManyToOne()
-    @JoinColumn(name = "fk_visitante")
+    @JoinColumn(name = "idEquipoVisitante")
     private Equipo equipoVisitante;
 
-    @OneToOne()
-    @JoinColumn(name = "marcador")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "fk_marcador", referencedColumnName = "id")
     private Resultado marcador;
 }
