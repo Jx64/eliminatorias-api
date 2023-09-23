@@ -1,11 +1,13 @@
 package com.example.eliminatorias.controllers;
 
 import com.example.eliminatorias.entities.Base;
+import com.example.eliminatorias.exceptions.GlobalExceptionHandler;
 import com.example.eliminatorias.services.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 
@@ -39,9 +41,9 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E equipo){
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, equipo));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, entity));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"ERROR CAN'T UPDATE\"}");
         }
