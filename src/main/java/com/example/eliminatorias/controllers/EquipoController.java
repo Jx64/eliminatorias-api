@@ -4,6 +4,8 @@ import com.example.eliminatorias.dtos.EquipoDto;
 import com.example.eliminatorias.dtos.EquipoMapper;
 import com.example.eliminatorias.entities.Equipo;
 import com.example.eliminatorias.services.EquipoServiceImpl;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ public class EquipoController extends BaseControllerImpl<Equipo, EquipoServiceIm
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchByName(@RequestParam String nombre){
+    public ResponseEntity<?> searchByName(@RequestParam @NotBlank String nombre){
         try {
             List<Equipo> listEquipo = servicio.search(nombre);
             List<EquipoDto> equipoDtos = listEquipo.stream().map(
@@ -49,7 +51,7 @@ public class EquipoController extends BaseControllerImpl<Equipo, EquipoServiceIm
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable Long id){
+    public ResponseEntity<?> getOne(@PathVariable @Min(1) Long id){
         try {
             EquipoDto equipoDtos = equipoMapper.equitoToEquipoDto(servicio.findById(id));
             return ResponseEntity.status(HttpStatus.OK).body(equipoDtos);
