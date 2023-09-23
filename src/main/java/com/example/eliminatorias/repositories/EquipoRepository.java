@@ -11,8 +11,9 @@ import java.util.List;
 public interface EquipoRepository extends BaseRepository<Equipo, Long> {
 
     @Query(
-            value = "SELECT * FROM equipo WHERE equipo.nombre LIKE %:nombre%",
+            value = "SELECT * FROM equipos WHERE equipos.nombre LIKE %:nombre%",
             nativeQuery = true
     )
     List<Equipo> search(@Param("nombre") String nombre);
+    
 }
