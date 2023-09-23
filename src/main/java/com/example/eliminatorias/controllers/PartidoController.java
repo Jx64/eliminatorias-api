@@ -6,6 +6,7 @@ import com.example.eliminatorias.entities.Partido;
 import com.example.eliminatorias.services.PartidoServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class PartidoController extends BaseControllerImpl<Partido, PartidoServic
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable @Min(1) Long id) {
+    public ResponseEntity<?> getOne(@PathVariable @NotNull Long id) {
         try {
             PartidoDto partidoDto = partidoMapper.partidoToPartidoDto(servicio.findById(id));
             return ResponseEntity.status(HttpStatus.OK).body(partidoDto);
@@ -51,7 +52,7 @@ public class PartidoController extends BaseControllerImpl<Partido, PartidoServic
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable @Min(1) Long id, @RequestBody @Valid Partido partido) {
+    public ResponseEntity<?> update(@PathVariable @NotNull Long id, @Valid @RequestBody Partido partido) {
         try {
             PartidoDto partidoDto = partidoMapper.partidoToPartidoDto(servicio.update(id, partido));
             return ResponseEntity.status(HttpStatus.OK).body(partidoDto);

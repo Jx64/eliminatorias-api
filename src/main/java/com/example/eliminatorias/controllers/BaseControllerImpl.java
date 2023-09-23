@@ -4,6 +4,7 @@ import com.example.eliminatorias.entities.Base;
 import com.example.eliminatorias.services.BaseServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
         }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable @Min(1) Long id){
+    public ResponseEntity<?> getOne(@PathVariable @NotNull Long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.findById(id));
         } catch (Exception e){
@@ -34,7 +35,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody @Valid E entity){
+    public ResponseEntity<?> save(@Valid @RequestBody E entity){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
         } catch (Exception e){
@@ -43,7 +44,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable @Min(1) Long id, @RequestBody @Valid E entity){
+    public ResponseEntity<?> update(@PathVariable @NotNull Long id, @Valid @RequestBody E entity){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, entity));
         } catch (Exception e){
@@ -52,7 +53,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable @Min(1) Long id){
+    public ResponseEntity<?> delete(@PathVariable @NotNull Long id){
         try {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
         } catch (Exception e){

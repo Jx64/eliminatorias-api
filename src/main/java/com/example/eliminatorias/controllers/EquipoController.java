@@ -6,6 +6,7 @@ import com.example.eliminatorias.entities.Equipo;
 import com.example.eliminatorias.services.EquipoServiceImpl;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +52,7 @@ public class EquipoController extends BaseControllerImpl<Equipo, EquipoServiceIm
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable @Min(1) Long id){
+    public ResponseEntity<?> getOne(@PathVariable @NotNull Long id){
         try {
             EquipoDto equipoDtos = equipoMapper.equitoToEquipoDto(servicio.findById(id));
             return ResponseEntity.status(HttpStatus.OK).body(equipoDtos);
