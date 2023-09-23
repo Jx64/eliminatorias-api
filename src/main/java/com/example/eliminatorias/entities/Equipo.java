@@ -1,6 +1,7 @@
 package com.example.eliminatorias.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,15 @@ import java.util.Set;
 @Audited
 public class Equipo extends Base implements Serializable {
 
+    @NotBlank(message = "Nombre can't be blank")
     @Column(name = "nombre",nullable = false, unique = true)
     private String nombre;
 
+    @NotBlank(message = "Bandera can't be blank")
     @Column(name = "bandera", nullable = false)
     private String bandera;
 
+    @NotBlank(message = "Tecnico can't be blank")
     @Column(name = "tecnico", nullable = false)
     private String directorTecnico;
 
