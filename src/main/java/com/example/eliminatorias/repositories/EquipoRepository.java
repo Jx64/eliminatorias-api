@@ -15,5 +15,5 @@ public interface EquipoRepository extends BaseRepository<Equipo, Long> {
             nativeQuery = true
     )
     List<Equipo> search(@Param("nombre") String nombre);
-    
+
 }
