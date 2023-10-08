@@ -5,11 +5,11 @@ import com.example.eliminatorias.dtos.PartidoMapper;
 import com.example.eliminatorias.entities.Partido;
 import com.example.eliminatorias.services.PartidoServiceImpl;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +28,7 @@ public class PartidoController extends BaseControllerImpl<Partido, PartidoServic
 
     @Override
     @GetMapping("")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getAll() {
         try {
             List<Partido> listPartido = servicio.findAll();
@@ -41,6 +42,7 @@ public class PartidoController extends BaseControllerImpl<Partido, PartidoServic
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getOne(@PathVariable @NotNull Long id) {
         try {
             PartidoDto partidoDto = partidoMapper.partidoToPartidoDto(servicio.findById(id));
@@ -52,6 +54,7 @@ public class PartidoController extends BaseControllerImpl<Partido, PartidoServic
 
     @Override
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@PathVariable @NotNull Long id, @Valid @RequestBody Partido partido) {
         try {
             PartidoDto partidoDto = partidoMapper.partidoToPartidoDto(servicio.update(id, partido));

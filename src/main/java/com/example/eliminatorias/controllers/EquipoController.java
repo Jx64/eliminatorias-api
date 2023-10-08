@@ -4,12 +4,12 @@ import com.example.eliminatorias.dtos.EquipoDto;
 import com.example.eliminatorias.dtos.EquipoMapper;
 import com.example.eliminatorias.entities.Equipo;
 import com.example.eliminatorias.services.EquipoServiceImpl;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +26,7 @@ public class EquipoController extends BaseControllerImpl<Equipo, EquipoServiceIm
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> searchByName(@RequestParam @NotBlank String nombre){
         try {
             List<Equipo> listEquipo = servicio.search(nombre);
@@ -39,6 +40,7 @@ public class EquipoController extends BaseControllerImpl<Equipo, EquipoServiceIm
 
     @Override
     @GetMapping("")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getAll() {
         try {
             List<Equipo> listEquipo = servicio.findAll();
@@ -52,6 +54,7 @@ public class EquipoController extends BaseControllerImpl<Equipo, EquipoServiceIm
 
     @Override
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getOne(@PathVariable @NotNull Long id){
         try {
             EquipoDto equipoDtos = equipoMapper.equitoToEquipoDto(servicio.findById(id));

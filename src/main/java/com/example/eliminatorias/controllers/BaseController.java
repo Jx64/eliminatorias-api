@@ -2,7 +2,6 @@ package com.example.eliminatorias.controllers;
 
 import com.example.eliminatorias.entities.Base;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

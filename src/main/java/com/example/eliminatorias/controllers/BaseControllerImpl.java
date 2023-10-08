@@ -3,13 +3,13 @@ package com.example.eliminatorias.controllers;
 import com.example.eliminatorias.entities.Base;
 import com.example.eliminatorias.services.BaseServiceImpl;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Validated
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
@@ -18,6 +18,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     protected S servicio;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getAll(){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.findAll());
@@ -26,6 +27,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
         }
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getOne(@PathVariable @NotNull Long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.findById(id));
@@ -35,6 +37,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> save(@Valid @RequestBody E entity){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
@@ -44,6 +47,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@PathVariable @NotNull Long id, @Valid @RequestBody E entity){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, entity));
@@ -53,6 +57,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable @NotNull Long id){
         try {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
