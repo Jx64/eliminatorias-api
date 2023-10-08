@@ -1,9 +1,7 @@
 package com.example.eliminatorias.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
