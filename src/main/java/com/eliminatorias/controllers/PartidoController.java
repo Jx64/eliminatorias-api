@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/v1/partidos")
 public class PartidoController extends BaseControllerImpl<Partido, PartidoServiceImpl> {
 
